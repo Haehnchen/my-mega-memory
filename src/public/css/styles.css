@@ -1,0 +1,25 @@
+/**
+ * Global styles and CSS variables for Mega Memory
+ */
+
+/* CSS Variables for light theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f7f7;
+  --bg-tertiary: #eeeeee;
+  --fg-primary: #000000;
+  --fg-secondary: #666666;
+  --accent-color: #0066cc;
+  --border-color: #cccccc;
+}
+
+/* CSS Variables for dark theme */
+.dark {
+  --bg-primary: #2b2b2b;
+  --bg-secondary: #313335;
+  --bg-tertiary: #3c3f41;
+  --fg-primary: #bbbbbb;
+  --fg-secondary: #808080;
+  --accent-color: #589df6;
+  --border-color: #555555;
+}

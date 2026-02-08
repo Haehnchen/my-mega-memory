@@ -1,0 +1,133 @@
+<style>
+  mark {
+    background-color: #fef08a;
+    color: #000;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  .dark mark {
+    background-color: #854d0e;
+    color: #fef9c3;
+  }
+</style>
+
+<div class="mb-8">
+  <h1 class="text-2xl font-bold mb-4">Search Sessions</h1>
+
+  <form action="/search" method="GET" class="mb-6">
+    <div class="flex gap-2">
+      <input
+        type="text"
+        name="q"
+        value="<%= query %>"
+        placeholder="Search message content..."
+        autofocus
+        class="flex-1 px-4 py-2 rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent"
+      />
+      <select
+        name="project"
+        class="px-3 py-2 rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent"
+      >
+        <option value="">All Projects</option>
+        <% projects.forEach(function(p) { %>
+          <option value="<%= p.projectUuid %>" <%= projectId === p.projectUuid ? 'selected' : '' %>><%= p.name %></option>
+        <% }); %>
+      </select>
+      <button
+        type="submit"
+        class="px-6 py-2 rounded-lg bg-jb-light-accent dark:bg-jb-dark-accent text-white hover:bg-jb-light-accent-hover dark:hover:bg-jb-dark-accent-hover transition-colors"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+
+  <% if (error) { %>
+    <div class="p-4 rounded-lg bg-msg-light-error-bg dark:bg-msg-dark-error-bg border border-msg-light-error-border dark:border-msg-dark-error-border mb-4">
+      <p class="text-sm"><%= error %></p>
+    </div>
+  <% } %>
+
+  <% if (query && !error) { %>
+    <p class="text-sm text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary mb-4">
+      Found <strong><%= totalResults %></strong> match<%= totalResults !== 1 ? 'es' : '' %>
+      across <strong><%= grouped.length %></strong> session<%= grouped.length !== 1 ? 's' : '' %>
+    </p>
+  <% } %>
+
+  <% if (grouped.length > 0) { %>
+    <div class="space-y-4">
+      <% grouped.forEach(function(group) { %>
+        <div class="rounded-lg border border-jb-light-border dark:border-jb-dark-border overflow-hidden">
+          <!-- Session header -->
+          <a href="/sessions/<%= group.sessionId %>"
+             class="block px-4 py-3 bg-jb-light-bg-secondary dark:bg-jb-dark-bg-secondary hover:bg-jb-light-bg-tertiary dark:hover:bg-jb-dark-bg-tertiary transition-colors">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="font-medium text-jb-light-accent dark:text-jb-dark-accent">
+                  <%= group.sessionTitle %>
+                </span>
+                <span class="text-sm text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary ml-2">
+                  (<%= group.projectName %>)
+                </span>
+              </div>
+              <span class="text-xs text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+                <%= group.matches.length %> match<%= group.matches.length !== 1 ? 'es' : '' %>
+              </span>
+            </div>
+          </a>
+
+          <!-- Matches -->
+          <div class="divide-y divide-jb-light-border dark:divide-jb-dark-border">
+            <% group.matches.forEach(function(match) { %>
+              <div class="px-4 py-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="inline-block text-xs px-2 py-0.5 rounded font-mono
+                    <% if (match.cardType === 'user') { %>
+                      bg-msg-light-user-bg dark:bg-msg-dark-user-bg text-msg-light-user-border dark:text-msg-dark-user-border
+                    <% } else if (match.cardType === 'assistant') { %>
+                      bg-msg-light-assistant-bg dark:bg-msg-dark-assistant-bg text-msg-light-assistant-border dark:text-msg-dark-assistant-border
+                    <% } else if (match.cardType === 'tool-use' || match.cardType === 'tool-result') { %>
+                      bg-msg-light-tool-bg dark:bg-msg-dark-tool-bg text-msg-light-tool-border dark:text-msg-dark-tool-border
+                    <% } else { %>
+                      bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary
+                    <% } %>
+                  ">
+                    <%= match.cardType %>
+                  </span>
+                  <span class="text-xs text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+                    score: <%= match.score %>
+                  </span>
+                  <% if (match.timestamp) { %>
+                    <span class="text-xs text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+                      <%= new Date(match.timestamp).toLocaleDateString() %>
+                    </span>
+                  <% } %>
+                </div>
+                <p class="text-sm leading-relaxed line-clamp-3 overflow-hidden">
+                  <%- match.content %>
+                </p>
+              </div>
+            <% }); %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } else if (query && !error) { %>
+    <div class="text-center py-12 text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+      <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <p class="text-lg">No results found for "<%= query %>"</p>
+      <p class="text-sm mt-2">Try different keywords or check spelling</p>
+    </div>
+  <% } else if (!query) { %>
+    <div class="text-center py-12 text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+      <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <p class="text-lg">Search across all session messages</p>
+      <p class="text-sm mt-2">Enter a search term above to find matching content</p>
+    </div>
+  <% } %>
+</div>

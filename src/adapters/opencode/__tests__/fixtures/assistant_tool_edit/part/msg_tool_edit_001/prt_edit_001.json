@@ -1,0 +1,1 @@
+{"id":"prt_edit_001","type":"tool","tool":"Edit","callID":"call_edit_001","time":{"start":1705312801000,"end":1705312805000},"state":{"status":"completed","input":{"file_path":"/home/user/project/src/main.kt","old_string":"fun oldFunction() {\n    println(\"old\")\n}","new_string":"fun newFunction() {\n    println(\"new\")\n}","replace_all":false},"output":{"success":true}}}

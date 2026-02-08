@@ -1,0 +1,47 @@
+{
+  "name": "my-mega-memory",
+  "version": "1.0.0",
+  "description": "Session data importer and viewer for AI chat sessions",
+  "main": "dist/index.js",
+  "bin": {
+    "my-mega-memory": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc && cp -r src/templates dist/ && cp -r src/public dist/",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "start": "npm run build && node dist/cli.js serve",
+    "dev": "ts-node src/cli.ts serve",
+    "import": "npm run build && node dist/cli.js import",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "better-sqlite3": "^12.1.0",
+    "commander": "^14.0.3",
+    "diff": "^8.0.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "markdown-it": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/diff": "^7.0.2",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.2",
+    "@types/express-ejs-layouts": "^2.5.4",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.15.18",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "ai",
+    "sessions",
+    "chat",
+    "import"
+  ],
+  "license": "MIT"
+}

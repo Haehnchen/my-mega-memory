@@ -1,0 +1,11 @@
+{
+    "id": "prt_reasoning_001",
+    "sessionID": "ses_assistant_test",
+    "messageID": "msg_assistant_001",
+    "type": "reasoning",
+    "text": "Let me think about this problem step by step...",
+    "time": {
+        "start": 1700000001000,
+        "end": 1700000002000
+    }
+}

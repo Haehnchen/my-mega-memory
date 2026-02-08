@@ -1,0 +1,16 @@
+{
+  "id": "prt_c1d41a3180017eG0U753FYFPs3",
+  "sessionID": "ses_3e2c36a5affeiKvkpFK5CEOZ1W",
+  "messageID": "msg_c1d419cdb0019zApRr8Nz0zlrc",
+  "type": "reasoning",
+  "text": "I need to read the file first before I can write to it.",
+  "metadata": {
+    "anthropic": {
+      "signature": "864cf102a8cd491d3f788c8fd6487877d871f404ad6dd5f8d15c1d70af91d4b3"
+    }
+  },
+  "time": {
+    "start": 1770017366808,
+    "end": 1770017367239
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "id": "msg_unknown_001",
+    "sessionID": "ses_unknown_test",
+    "role": "system",
+    "time": {
+        "created": 1700000000000
+    },
+    "summary": {
+        "title": "Test unknown role message",
+        "diffs": []
+    },
+    "agent": "build",
+    "model": {
+        "providerID": "test",
+        "modelID": "test-model"
+    }
+}

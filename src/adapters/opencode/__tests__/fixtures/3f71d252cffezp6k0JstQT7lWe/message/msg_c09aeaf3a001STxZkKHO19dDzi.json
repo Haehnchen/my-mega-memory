@@ -1,0 +1,17 @@
+{
+  "id": "msg_c09aeaf3a001STxZkKHO19dDzi",
+  "sessionID": "ses_3f71d252cffezp6k0JstQT7lWe",
+  "role": "user",
+  "time": {
+    "created": 1769688969018
+  },
+  "summary": {
+    "title": "Minimal text placeholder handling",
+    "diffs": []
+  },
+  "agent": "build",
+  "model": {
+    "providerID": "nvidia",
+    "modelID": "moonshotai/kimi-k2.5"
+  }
+}

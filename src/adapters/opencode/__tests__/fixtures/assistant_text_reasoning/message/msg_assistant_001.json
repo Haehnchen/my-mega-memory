@@ -1,0 +1,18 @@
+{
+    "id": "msg_assistant_001",
+    "sessionID": "ses_assistant_test",
+    "role": "assistant",
+    "time": {
+        "created": 1700000000000,
+        "completed": 1700000005000
+    },
+    "summary": {
+        "title": "Test assistant message with text and reasoning",
+        "diffs": []
+    },
+    "agent": "build",
+    "model": {
+        "providerID": "test",
+        "modelID": "test-model"
+    }
+}

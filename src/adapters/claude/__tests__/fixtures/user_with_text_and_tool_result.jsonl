@@ -1,0 +1,1 @@
+{"type":"user","timestamp":"2024-01-15T10:05:00.000Z","message":{"content":[{"type":"text","text":"Here is the result:"},{"type":"tool_result","tool_use_id":"toolu_01DEF","content":"Some output data"}]},"uuid":"uuid-user-003"}

@@ -1,0 +1,20 @@
+{
+  "id": "prt_c1d419be7001fUoaYqLuwYg6qv",
+  "sessionID": "ses_3e2c36a5affeiKvkpFK5CEOZ1W",
+  "messageID": "msg_c1d418dc3001Vqeq1KFsLn7xCK",
+  "type": "tool",
+  "callID": "call_function_e7eryvyu65f0_1",
+  "tool": "write",
+  "state": {
+    "status": "error",
+    "input": {
+      "filePath": "/home/user/projects/myapp/helloworld.php",
+      "content": "<?php\n\necho \"Hello, World!!!!\";\n"
+    },
+    "error": "Error: You must read file /home/user/projects/myapp/helloworld.php before overwriting it. Use the Read tool first",
+    "time": {
+      "start": 1770017365161,
+      "end": 1770017365163
+    }
+  }
+}

@@ -1,0 +1,64 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Projects</h1>
+    <span class="text-sm text-jb-light-comment dark:text-jb-dark-comment">
+      <%= projects.length %> project<%= projects.length !== 1 ? 's' : '' %>
+    </span>
+  </div>
+
+  <% if (projects.length === 0) { %>
+    <div class="text-center py-16">
+      <svg class="w-16 h-16 mx-auto text-jb-light-comment dark:text-jb-dark-comment mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+      </svg>
+      <h3 class="text-lg font-medium mb-2">No projects found</h3>
+      <p class="text-jb-light-comment dark:text-jb-dark-comment">Import some sessions first using the CLI.</p>
+    </div>
+  <% } else { %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% projects.forEach(project => { %>
+         <a href="/sessions/project/<%= project.projectUuid %>"
+           class="group block p-5 bg-jb-light-bg-secondary dark:bg-jb-dark-bg-secondary rounded-lg border border-jb-light-border dark:border-jb-dark-border hover:border-jb-light-accent dark:hover:border-jb-dark-accent transition-all hover:shadow-lg">
+          <div class="space-y-3">
+            <!-- Header with folder icon and arrow -->
+            <div class="flex items-start justify-between">
+              <div class="p-2 rounded-lg bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary">
+                <svg class="w-5 h-5 text-jb-light-accent dark:text-jb-dark-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                </svg>
+              </div>
+              <svg class="w-5 h-5 text-jb-light-comment dark:text-jb-dark-comment group-hover:text-jb-light-accent dark:group-hover:text-jb-dark-accent transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+
+            <!-- Project name -->
+            <h3 class="font-semibold text-lg group-hover:text-jb-light-accent dark:group-hover:text-jb-dark-accent transition-colors"><%= project.name %></h3>
+
+            <!-- Project path -->
+            <% if (project.path) { %>
+              <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment font-mono truncate" title="<%= project.path %>">
+                <%= project.path %>
+              </p>
+            <% } %>
+
+            <!-- Footer with session count, updated date, and provider icons -->
+            <div class="flex items-center justify-between pt-2 border-t border-jb-light-border dark:border-jb-dark-border">
+              <div class="text-sm text-jb-light-comment dark:text-jb-dark-comment">
+                <div><%= project.sessionCount %> session<%= project.sessionCount !== 1 ? 's' : '' %></div>
+                <div class="text-xs mt-1"><%= new Date(project.updatedAt).toLocaleDateString() %></div>
+              </div>
+              <div class="flex items-center gap-1">
+                <% project.providers.forEach(provider => { %>
+                  <div class="provider-icon w-5 h-5 <%= provider %>" title="<%= provider.replace('_', ' ') %>">
+                    <img src="/assets/icons/providers/<%= provider %>.svg" alt="<%= provider %>">
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% }); %>
+    </div>
+  <% } %>
+</div>

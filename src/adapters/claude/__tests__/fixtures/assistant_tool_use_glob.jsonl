@@ -1,0 +1,1 @@
+{"type":"assistant","timestamp":"2024-01-15T10:02:00.000Z","message":{"content":[{"type":"tool_use","id":"toolu_01GLOB","name":"Glob","input":{"pattern":"**/*.kt","path":"/home/user/project/src"}}],"model":"claude-3-opus-20240229"},"uuid":"uuid-assistant-glob"}

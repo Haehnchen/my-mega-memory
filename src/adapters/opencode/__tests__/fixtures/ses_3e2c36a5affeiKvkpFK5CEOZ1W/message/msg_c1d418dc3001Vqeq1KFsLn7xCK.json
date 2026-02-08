@@ -1,0 +1,29 @@
+{
+  "id": "msg_c1d418dc3001Vqeq1KFsLn7xCK",
+  "sessionID": "ses_3e2c36a5affeiKvkpFK5CEOZ1W",
+  "role": "assistant",
+  "time": {
+    "created": 1770017361347,
+    "completed": 1770017365208
+  },
+  "parentID": "msg_c1d418db00010wln66DaIhrPjx",
+  "modelID": "minimax-m2.1-free",
+  "providerID": "opencode",
+  "mode": "build",
+  "agent": "build",
+  "path": {
+    "cwd": "/home/user/projects/myapp",
+    "root": "/home/user/projects/myapp"
+  },
+  "cost": 0,
+  "tokens": {
+    "input": 88,
+    "output": 108,
+    "reasoning": 0,
+    "cache": {
+      "read": 510,
+      "write": 11540
+    }
+  },
+  "finish": "tool-calls"
+}

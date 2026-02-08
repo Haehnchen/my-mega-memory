@@ -1,0 +1,67 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold"><%= project.name %></h1>
+      <% if (project.path) { %>
+        <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment mt-1 font-mono truncate" title="<%= project.path %>">
+          <%= project.path %>
+        </p>
+      <% } %>
+      <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment mt-1">
+        <%= sessions.length %> session<%= sessions.length !== 1 ? 's' : '' %>
+      </p>
+    </div>
+    <form action="/search" method="GET" class="flex gap-2">
+      <input type="hidden" name="project" value="<%= project.projectUuid %>" />
+      <input
+        type="text"
+        name="q"
+        placeholder="Search in <%= project.name %>..."
+        class="px-3 py-1.5 text-sm rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent w-64"
+      />
+      <button
+        type="submit"
+        class="px-4 py-1.5 text-sm rounded-lg bg-jb-light-accent dark:bg-jb-dark-accent text-white hover:bg-jb-light-accent-hover dark:hover:bg-jb-dark-accent-hover transition-colors"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+
+  <% if (sessions.length === 0) { %>
+    <div class="text-center py-16">
+      <svg class="w-16 h-16 mx-auto text-jb-light-comment dark:text-jb-dark-comment mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+      </svg>
+      <h3 class="text-lg font-medium mb-2">No sessions found</h3>
+      <p class="text-jb-light-comment dark:text-jb-dark-comment">This project has no sessions yet.</p>
+    </div>
+  <% } else { %>
+    <div class="space-y-3">
+      <% sessions.forEach(session => { %>
+        <a href="/sessions/<%= session.sessionId %>"
+           class="group block p-4 bg-jb-light-bg-secondary dark:bg-jb-dark-bg-secondary rounded-lg border border-jb-light-border dark:border-jb-dark-border hover:border-jb-light-accent dark:hover:border-jb-dark-accent transition-all">
+          <div class="flex items-center gap-3 mb-2">
+            <!-- Provider Icon -->
+            <div class="flex-shrink-0 provider-icon w-5 h-5 <%= session.provider %>" title="<%= session.provider.replace('_', ' ') %>">
+              <img src="/assets/icons/providers/<%= session.provider %>.svg" alt="<%= session.provider %>">
+            </div>
+
+            <h3 class="font-medium truncate group-hover:text-jb-light-accent dark:group-hover:text-jb-dark-accent transition-colors"><%= session.title %></h3>
+          </div>
+
+          <div class="flex items-center gap-4 text-sm text-jb-light-comment dark:text-jb-dark-comment ml-8">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary">
+              <%= session.provider.replace('_', ' ') %>
+            </span>
+            <span><%= session.messageCount %> messages</span>
+            <span>•</span>
+            <span>Created: <%= new Date(session.createdAt).toLocaleDateString() %></span>
+            <span>•</span>
+            <span>Updated: <%= new Date(session.updatedAt).toLocaleDateString() %></span>
+          </div>
+        </a>
+      <% }); %>
+    </div>
+  <% } %>
+</div>

@@ -1,0 +1,1 @@
+{"timestamp":"2024-01-15T10:05:00.000Z","type":"response_item","payload":{"type":"custom_tool_call","name":"create_file","call_id":"call_XYZ789","input":"path: src/main/Test.kt\ncontent: class Test {}"}}

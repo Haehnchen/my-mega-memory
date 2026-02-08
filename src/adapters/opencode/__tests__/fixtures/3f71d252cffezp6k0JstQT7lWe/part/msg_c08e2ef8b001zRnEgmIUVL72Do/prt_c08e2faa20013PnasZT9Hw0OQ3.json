@@ -1,0 +1,24 @@
+{
+  "id": "prt_c08e2faa20013PnasZT9Hw0OQ3",
+  "sessionID": "ses_3f71d252cffezp6k0JstQT7lWe",
+  "messageID": "msg_c08e2ef8b001zRnEgmIUVL72Do",
+  "type": "tool",
+  "callID": " functions.webfetch:1",
+  "tool": "webfetch",
+  "state": {
+    "status": "completed",
+    "input": {
+      "url": "https://wttr.in/Reken?format=3",
+      "format": "text"
+    },
+    "output": "Reken: 🌫  -1°C\n",
+    "title": "https://wttr.in/Reken?format=3 (text/plain; charset=utf-8)",
+    "metadata": {
+      "truncated": false
+    },
+    "time": {
+      "start": 1769675619502,
+      "end": 1769675632302
+    }
+  }
+}

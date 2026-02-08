@@ -1,0 +1,18 @@
+{
+  "id": "prt_c1d3ca309001DS4iJNTukyJogx",
+  "sessionID": "ses_3e2c36a5affeiKvkpFK5CEOZ1W",
+  "messageID": "msg_c1d3c95b70015gXqyj46eMknJW",
+  "type": "tool",
+  "callID": "call_function_kn3mbl00s1oy_1",
+  "tool": "write",
+  "state": {
+    "status": "running",
+    "input": {
+      "filePath": "/home/user/projects/myapp/helloworld.php",
+      "content": "<?php\n\necho \"Hello, World!\";\n"
+    },
+    "time": {
+      "start": 1770017039325
+    }
+  }
+}

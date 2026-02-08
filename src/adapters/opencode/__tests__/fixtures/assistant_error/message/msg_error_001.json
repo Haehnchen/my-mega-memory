@@ -1,0 +1,52 @@
+{
+  "id": "msg_error_001",
+  "sessionID": "ses_error_test",
+  "role": "assistant",
+  "time": {
+    "created": 1769509593517,
+    "completed": 1769509594267
+  },
+  "error": {
+    "name": "APIError",
+    "data": {
+      "message": "Key limit exceeded (total limit). Manage it using https://openrouter.ai/settings/keys",
+      "statusCode": 403,
+      "isRetryable": false,
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "cf-ray": "9c478d730a63c0b5-FRA",
+        "connection": "keep-alive",
+        "content-encoding": "gzip",
+        "content-type": "application/json",
+        "date": "Tue, 27 Jan 2026 10:26:34 GMT",
+        "server": "cloudflare",
+        "transfer-encoding": "chunked",
+        "vary": "Accept-Encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "responseBody": "{\"error\":{\"message\":\"Key limit exceeded (total limit). Manage it using https://openrouter.ai/settings/keys\",\"code\":403}}",
+      "metadata": {
+        "url": "https://openrouter.ai/api/v1/chat/completions"
+      }
+    }
+  },
+  "parentID": "msg_parent_001",
+  "modelID": "anthropic/claude-sonnet-4.5",
+  "providerID": "openrouter",
+  "mode": "build",
+  "agent": "build",
+  "path": {
+    "cwd": "/home/daniel/test-project",
+    "root": "/"
+  },
+  "cost": 0,
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "reasoning": 0,
+    "cache": {
+      "read": 0,
+      "write": 0
+    }
+  }
+}

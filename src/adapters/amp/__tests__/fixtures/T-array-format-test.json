@@ -1,0 +1,131 @@
+{
+  "v": 2514,
+  "id": "T-different-id-in-json",
+  "created": 1770147638256,
+  "messages": [
+    {
+      "role": "user",
+      "messageId": 0,
+      "content": [
+        {
+          "type": "text",
+          "text": "Please edit the file and search for patterns"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "messageId": 1,
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "I need to read the file first and then search for patterns.",
+          "signature": "sig_test",
+          "provider": "anthropic"
+        },
+        {
+          "type": "text",
+          "text": "I'll read the file and search for patterns."
+        },
+        {
+          "type": "tool_use",
+          "complete": true,
+          "id": "toolu_read_001",
+          "name": "Read",
+          "input": {
+            "path": "/home/user/project/src/main.kt"
+          }
+        },
+        {
+          "type": "tool_use",
+          "complete": true,
+          "id": "toolu_glob_001",
+          "name": "glob",
+          "input": {
+            "filePattern": "**/*.kt"
+          }
+        }
+      ],
+      "usage": {
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-03T19:41:19.913Z"
+      }
+    },
+    {
+      "role": "user",
+      "messageId": 2,
+      "content": [
+        {
+          "type": "tool_result",
+          "toolUseID": "toolu_read_001",
+          "run": {
+            "status": "done",
+            "result": {
+              "content": "fun main() { println(\"Hello\") }"
+            }
+          }
+        },
+        {
+          "type": "tool_result",
+          "toolUseID": "toolu_glob_001",
+          "run": {
+            "status": "done",
+            "result": ["src/main.kt", "src/util.kt"]
+          }
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "messageId": 3,
+      "content": [
+        {
+          "type": "text",
+          "text": "Now I'll edit the file."
+        },
+        {
+          "type": "tool_use",
+          "complete": true,
+          "id": "toolu_edit_001",
+          "name": "edit_file",
+          "input": {
+            "path": "/home/user/project/src/main.kt",
+            "old_str": "println(\"Hello\")",
+            "new_str": "println(\"Hello World\")"
+          }
+        }
+      ],
+      "usage": {
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-03T19:42:30.000Z"
+      }
+    },
+    {
+      "role": "user",
+      "messageId": 4,
+      "content": [
+        {
+          "type": "tool_result",
+          "toolUseID": "toolu_edit_001",
+          "run": {
+            "status": "done",
+            "result": {
+              "diff": "```diff\n- println(\"Hello\")\n+ println(\"Hello World\")\n```",
+              "lineRange": [1, 1]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "env": {
+    "initial": {
+      "trees": [
+        {
+          "displayName": "test-project",
+          "uri": "file:///home/user/project"
+        }
+      ]
+    }
+  }
+}

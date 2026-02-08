@@ -1,0 +1,1 @@
+{"type":"user","timestamp":"2024-01-15T10:03:00.000Z","message":{"content":[{"type":"tool_result","tool_use_id":"toolu_01ABC","content":"total 16\ndrwxr-xr-x  4 user user 4096 Jan 15 10:00 .\ndrwxr-xr-x 10 user user 4096 Jan 15 09:00 .."}]},"uuid":"uuid-user-002"}

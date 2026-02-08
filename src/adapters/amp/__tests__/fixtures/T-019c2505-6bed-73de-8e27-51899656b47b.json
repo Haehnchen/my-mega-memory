@@ -1,0 +1,112 @@
+{
+  "v": 2514,
+  "id": "T-019c2505-6bed-73de-8e27-51899656b47b",
+  "created": 1770147638256,
+  "messages": [
+    {
+      "role": "user",
+      "messageId": 0,
+      "content": [
+        {
+          "type": "text",
+          "text": "Can we add a dark / light theme switch using Tailwind CSS?"
+        }
+      ],
+      "userState": {
+        "currentlyVisibleFiles": []
+      },
+      "agentMode": "smart",
+      "meta": {
+        "sentAt": 1770147672372
+      }
+    },
+    {
+      "role": "assistant",
+      "messageId": 1,
+      "content": [
+        {
+          "type": "thinking",
+          "thinking": "The user wants to add a dark/light theme switch using Tailwind CSS.",
+          "signature": "signature_placeholder_for_testing",
+          "provider": "anthropic"
+        },
+        {
+          "type": "text",
+          "text": "Let me check the current template setup."
+        },
+        {
+          "type": "tool_use",
+          "complete": true,
+          "id": "toolu_test_001",
+          "name": "Read",
+          "input": {
+            "path": "/home/user/project/templates/base.html.twig"
+          }
+        }
+      ],
+      "state": {
+        "type": "complete",
+        "stopReason": "tool_use"
+      },
+      "usage": {
+        "model": "claude-opus-4-5-20251101",
+        "maxInputTokens": 168000,
+        "inputTokens": 10,
+        "outputTokens": 223,
+        "cacheCreationInputTokens": 2885,
+        "cacheReadInputTokens": 15973,
+        "totalInputTokens": 18868,
+        "timestamp": "2026-02-03T19:41:19.913Z"
+      }
+    },
+    {
+      "role": "user",
+      "messageId": 2,
+      "content": [
+        {
+          "type": "tool_result",
+          "toolUseID": "toolu_test_001",
+          "run": {
+            "status": "done",
+            "progress": {},
+            "result": {
+              "absolutePath": "/home/user/project/templates/base.html.twig",
+              "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>"
+            },
+            "trackFiles": [
+              "file:///home/user/project/templates/base.html.twig"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "env": {
+    "initial": {
+      "trees": [
+        {
+          "displayName": "test-project",
+          "uri": "file:///home/user/project",
+          "repository": {
+            "type": "git",
+            "url": "https://github.com/test/test",
+            "ref": "refs/heads/main",
+            "sha": "abc123def456"
+          }
+        }
+      ],
+      "platform": {
+        "os": "linux",
+        "osVersion": "Ubuntu 25.10",
+        "cpuArchitecture": "x64",
+        "webBrowser": false,
+        "client": "JetBrains",
+        "clientVersion": "0.0.1",
+        "clientType": "cli"
+      },
+      "tags": [
+        "model:claude-opus-4-5-20251101"
+      ]
+    }
+  }
+}

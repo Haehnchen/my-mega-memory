@@ -1,0 +1,7 @@
+{"timestamp":"2024-01-15T10:00:00.000Z","type":"session_meta","payload":{"id":"test-mixed-001","cwd":"/home/user/project","originator":"test-ide","cli_version":"1.0.0","git":{"branch":"main","commit":"abc123"}}}
+{"timestamp":"2024-01-15T10:01:00.000Z","type":"event_msg","payload":{"type":"user_message","message":"List the files in the current directory"}}
+{"timestamp":"2024-01-15T10:01:30.000Z","type":"turn_context","payload":{"model":"gpt-4o","effort":"medium","cwd":"/home/user/project"}}
+{"timestamp":"2024-01-15T10:02:00.000Z","type":"event_msg","payload":{"type":"agent_reasoning","text":"The user wants to see the files. I'll use the shell command to list them."}}
+{"timestamp":"2024-01-15T10:02:30.000Z","type":"response_item","payload":{"type":"function_call","name":"shell","call_id":"call_LIST001","arguments":"{\"command\":\"ls -la\"}"}}
+{"timestamp":"2024-01-15T10:03:00.000Z","type":"response_item","payload":{"type":"function_call_output","call_id":"call_LIST001","output":"total 8\ndrwxr-xr-x 2 user user 4096 Jan 15 10:00 .\n-rw-r--r-- 1 user user  123 Jan 15 10:00 file1.txt\n-rw-r--r-- 1 user user  456 Jan 15 10:00 file2.txt"}}
+{"timestamp":"2024-01-15T10:03:30.000Z","type":"event_msg","payload":{"type":"agent_message","message":"Here are the files in your current directory:\n- file1.txt\n- file2.txt"}}

@@ -1,0 +1,11 @@
+{
+  "id": "prt_c08e33a54001SSHUAXqqjhIPdt",
+  "sessionID": "ses_3f71d252cffezp6k0JstQT7lWe",
+  "messageID": "msg_c08e32eb80013wgCBTNQeArtxt",
+  "type": "reasoning",
+  "text": "  Great! I got the weather information for Reken. It shows:\n- Location: Reken\n- Condition: 🌫 (foggy)\n- Temperature: -1°C\n\nNow I'll create",
+  "time": {
+    "start": 1769675635284,
+    "end": 1769675642219
+  }
+}

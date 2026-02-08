@@ -1,0 +1,24 @@
+{
+  "id": "prt_c1d41a4c7001AG2i81uuXPCy6C",
+  "sessionID": "ses_3e2c36a5affeiKvkpFK5CEOZ1W",
+  "messageID": "msg_c1d419cdb0019zApRr8Nz0zlrc",
+  "type": "tool",
+  "callID": "call_function_em34455nlb8e_1",
+  "tool": "read",
+  "state": {
+    "status": "completed",
+    "input": {
+      "filePath": "/home/user/projects/myapp/helloworld.php"
+    },
+    "output": "<file>\n00001| <?php\n00002| \n00003| echo \"Hello, World!\";\n00004| \n\n(End of file - total 4 lines)\n</file>",
+    "title": "helloworld.php",
+    "metadata": {
+      "preview": "<?php\n\necho \"Hello, World!\";\n",
+      "truncated": false
+    },
+    "time": {
+      "start": 1770017367588,
+      "end": 1770017367593
+    }
+  }
+}

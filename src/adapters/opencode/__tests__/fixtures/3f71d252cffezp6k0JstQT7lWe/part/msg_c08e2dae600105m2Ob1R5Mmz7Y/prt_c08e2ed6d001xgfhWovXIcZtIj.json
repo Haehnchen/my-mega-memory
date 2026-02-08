@@ -1,0 +1,24 @@
+{
+  "id": "prt_c08e2ed6d001xgfhWovXIcZtIj",
+  "sessionID": "ses_3f71d252cffezp6k0JstQT7lWe",
+  "messageID": "msg_c08e2dae600105m2Ob1R5Mmz7Y",
+  "type": "tool",
+  "callID": " functions.webfetch:0",
+  "tool": "webfetch",
+  "state": {
+    "status": "completed",
+    "input": {
+      "url": "https://www.google.com/search?q=weather+reken",
+      "format": "text"
+    },
+    "output": "Google SearchIf you're having trouble accessing Google Search, please&nbsp;click here, or send&nbsp;feedback.",
+    "title": "https://www.google.com/search?q=weather+reken (text/html; charset=UTF-8)",
+    "metadata": {
+      "truncated": false
+    },
+    "time": {
+      "start": 1769675615963,
+      "end": 1769675616130
+    }
+  }
+}

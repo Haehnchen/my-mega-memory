@@ -1,0 +1,11 @@
+{
+    "id": "prt_text_001",
+    "sessionID": "ses_assistant_test",
+    "messageID": "msg_assistant_001",
+    "type": "text",
+    "text": "Here is my response to your question.",
+    "time": {
+        "start": 1700000003000,
+        "end": 1700000004000
+    }
+}

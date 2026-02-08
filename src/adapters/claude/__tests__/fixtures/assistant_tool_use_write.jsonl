@@ -1,0 +1,1 @@
+{"type":"assistant","timestamp":"2024-01-15T10:02:00.000Z","message":{"content":[{"type":"tool_use","id":"toolu_01WRITE","name":"Write","input":{"file_path":"/home/user/project/new_file.kt","content":"package test\n\nfun main() {\n    println(\"Hello World\")\n}"}}],"model":"claude-3-opus-20240229"},"uuid":"uuid-assistant-write"}
