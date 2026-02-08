@@ -4,7 +4,16 @@ AI Chat Session Importer and Viewer
 
 Import your AI chat sessions into a local database, then browse and search them through a web interface.
 
-**Supported Providers:** Claude Code, OpenCode, Codex, Amp, and Junie
+## Supported Providers
+
+| Provider | Session Storage Location |
+|----------|-------------------------|
+| **Claude Code** | `~/.claude/projects/` |
+| **OpenCode** | `~/.local/share/opencode/storage/` |
+| **Codex** (IntelliJ) | `~/.cache/JetBrains/*/aia/codex/sessions/` |
+| **Codex** (CLI) | `~/.codex/sessions/` |
+| **Amp** | `~/.local/share/amp/threads/` |
+| **Junie** | `~/.junie/sessions/` |
 
 ## Quick Start
 
