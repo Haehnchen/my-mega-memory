@@ -15,6 +15,16 @@ Import your AI chat sessions into a local database, then browse and search them 
 | **Amp** | `~/.local/share/amp/threads/` |
 | **Junie** | `~/.junie/sessions/` |
 
+## Tech Stack
+
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Database** | SQLite (better-sqlite3) | Local storage for sessions and messages |
+| **Search** | SQLite FTS5 (trigram tokenizer) | Full-text search with BM25 ranking |
+| **Backend** | Node.js + TypeScript + Express 5 | Server and CLI application |
+| **Templates** | EJS + express-ejs-layouts | Server-side rendering |
+| **Styling** | Tailwind CSS v4 (CDN) | Utility-first CSS framework |
+
 ## Quick Start
 
 ```bash
