@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
 import { ProjectRepository, SessionRepository, MessageRepository } from './repository';
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
+import path from 'path';
 
 export class DatabaseManager {
   private readonly db: Database.Database;
@@ -10,6 +11,7 @@ export class DatabaseManager {
 
   constructor() {
     const dbPath = 'var/sessions.db';
+    mkdirSync(path.dirname(dbPath), { recursive: true });
     const isNewDatabase = !existsSync(dbPath);
     this.db = new Database(dbPath);
 
@@ -94,6 +96,13 @@ export class DatabaseManager {
     this.db.exec(`
       CREATE INDEX IF NOT EXISTS idx_messages_sequence ON messages(sequence)
     `);
+  }
+
+  resetTables(): void {
+    this.db.exec('DROP TABLE IF EXISTS messages');
+    this.db.exec('DROP TABLE IF EXISTS sessions');
+    this.db.exec('DROP TABLE IF EXISTS projects');
+    this.initTables();
   }
 
   /**

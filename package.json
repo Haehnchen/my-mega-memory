@@ -13,6 +13,8 @@
     "start": "npm run build && node dist/cli.js serve",
     "dev": "ts-node src/cli.ts serve",
     "import": "npm run build && node dist/cli.js import",
+    "push": "npm run build && node dist/cli.js push",
+    "create-database": "npm run build && node dist/cli.js create-database",
     "clean": "rm -rf dist"
   },
   "dependencies": {

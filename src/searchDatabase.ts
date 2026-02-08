@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
 import { SearchRepository } from './repository/SearchRepository';
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
+import path from 'path';
 
 /**
  * Manages the separate FTS5 search database (var/search.db)
@@ -24,6 +25,7 @@ export class SearchDatabase {
 
   constructor() {
     const dbPath = 'var/search.db';
+    mkdirSync(path.dirname(dbPath), { recursive: true });
     const isNewDatabase = !existsSync(dbPath);
     this.db = new Database(dbPath);
 
@@ -37,6 +39,11 @@ export class SearchDatabase {
       this.db.exec(SEARCH_TABLE_SQL);
     }
     this.search = new SearchRepository(this.db);
+  }
+
+  resetTables(): void {
+    this.db.exec('DROP TABLE IF EXISTS search_messages');
+    this.db.exec(SEARCH_TABLE_SQL);
   }
 
   /**

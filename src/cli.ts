@@ -3,6 +3,8 @@
 import { Command } from 'commander';
 import { serveCommand } from './command/serve';
 import { importCommand } from './command/import';
+import { pushCommand } from './command/push';
+import { createDatabaseCommand } from './command/createDatabase';
 const program = new Command();
 
 program
@@ -12,5 +14,7 @@ program
 
 program.addCommand(serveCommand);
 program.addCommand(importCommand);
+program.addCommand(pushCommand);
+program.addCommand(createDatabaseCommand);
 
 program.parse();

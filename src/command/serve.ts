@@ -7,6 +7,7 @@ import {SearchDatabase} from '../searchDatabase';
 import {projectController} from '../controller/projectController';
 import {sessionController} from '../controller/sessionController';
 import {searchController} from '../controller/searchController';
+import {apiController} from '../controller/apiController';
 
 export const serveCommand = new Command('serve')
   .description('Start the web server to view sessions')
@@ -26,6 +27,9 @@ export const serveCommand = new Command('serve')
     
     // Static files
     app.use(express.static(path.join(__dirname, '..', 'public')));
+
+    // JSON body parser for API
+    app.use(express.json({ limit: '50mb' }));
     
     // Initialize databases
     app.locals.db = new DatabaseManager();
@@ -35,6 +39,7 @@ export const serveCommand = new Command('serve')
     app.use('/', projectController);
     app.use('/sessions', sessionController);
     app.use('/search', searchController);
+    app.use('/api', apiController);
     
     // Error handler
     app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
