@@ -25,7 +25,8 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-ejs-layouts": "^2.5.1",
-    "markdown-it": "^14.1.0"
+    "markdown-it": "^14.1.0",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
@@ -37,7 +38,7 @@
     "@types/node": "^22.15.18",
     "jest": "^30.2.0",
     "ts-jest": "^29.4.6",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "keywords": [
     "ai",
