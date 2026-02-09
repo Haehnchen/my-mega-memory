@@ -11,6 +11,8 @@
   --fg-secondary: #666666;
   --accent-color: #0066cc;
   --border-color: #cccccc;
+  --font-sans: "IBM Plex Sans", "Segoe UI", Tahoma, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", "Fira Code", "Consolas", monospace;
 }
 
 /* CSS Variables for dark theme */
@@ -22,4 +24,27 @@
   --fg-secondary: #808080;
   --accent-color: #589df6;
   --border-color: #555555;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.app-root {
+  font-family: var(--font-sans);
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.dark body.app-root {
+  background-color: var(--bg-primary);
+}
+
+.font-mono,
+code,
+pre {
+  font-family: var(--font-mono);
 }

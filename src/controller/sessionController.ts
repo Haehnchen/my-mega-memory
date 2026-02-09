@@ -29,9 +29,11 @@ router.get('/project/:projectUuid', (req: Request, res: Response) => {
   }
 
   const sessions = project.id ? db.sessions.listByProjectId(project.id) : [];
+  const projects = db.projects.listAll();
 
   res.render('sessions', {
     title: `${project.name} - Sessions`,
+    projects,
     project: {
       id: project.id!,
       projectUuid: project.projectUuid,
@@ -39,6 +41,7 @@ router.get('/project/:projectUuid', (req: Request, res: Response) => {
       path: project.path
     },
     sessions: sessions || [],
+    activeProjectUuid: project.projectUuid,
     breadcrumbs: [
       { label: 'Projects', url: '/' },
       { label: project.name, url: `/sessions/project/${projectUuid}`, active: true }
@@ -71,6 +74,7 @@ router.get('/:sessionId', (req: Request, res: Response) => {
   const messages = db.messages.getBySessionId(session.id);
   const projects = db.projects.listAll();
   const project = projects.find((p: { id: number }) => p.id === Number(session.projectId));
+  const sessions = session.projectId ? db.sessions.listByProjectId(Number(session.projectId)) : [];
 
   // Process messages to convert diff blocks and markdown to HTML
   const processedMessages = messages.map((msg: RenderableMessage) => ({
@@ -96,6 +100,8 @@ router.get('/:sessionId', (req: Request, res: Response) => {
 
   res.render('session-detail', {
     title: `${session.title} - Session Detail`,
+    projects,
+    sessions,
     session: {
       id: session.id,
       projectId: session.projectId,
@@ -112,6 +118,8 @@ router.get('/:sessionId', (req: Request, res: Response) => {
     },
     messages: processedMessages,
     project,
+    activeProjectUuid: project?.projectUuid,
+    activeSessionId: session.sessionId,
     breadcrumbs: [
       { label: 'Projects', url: '/' },
       { label: project?.name || 'Unknown', url: `/sessions/project/${project?.projectUuid || session.projectId}` },

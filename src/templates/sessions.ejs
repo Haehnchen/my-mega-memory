@@ -1,67 +1,74 @@
-<div class="space-y-6">
-  <div class="flex items-center justify-between">
-    <div>
-      <h1 class="text-2xl font-bold"><%= project.name %></h1>
-      <% if (project.path) { %>
-        <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment mt-1 font-mono truncate" title="<%= project.path %>">
-          <%= project.path %>
-        </p>
-      <% } %>
-      <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment mt-1">
-        <%= sessions.length %> session<%= sessions.length !== 1 ? 's' : '' %>
-      </p>
+<div class="h-full min-h-0">
+  <div class="grid h-full min-h-0 grid-rows-[auto_1fr] rounded-2xl border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg-secondary/70 dark:bg-jb-dark-bg-secondary/70 backdrop-blur">
+    <%- include('partials/toolbar', { query: typeof query !== 'undefined' ? query : '' }) %>
+    <div class="grid min-h-0 grid-cols-[minmax(180px,18%)_minmax(220px,24%)_minmax(0,1fr)]">
+    <!-- Projects Column -->
+    <%- include('partials/projects-sidebar', { projects, activeProjectUuid: typeof activeProjectUuid !== 'undefined' ? activeProjectUuid : null, query: typeof query !== 'undefined' ? query : '', context: 'sessions' }) %>
+
+    <!-- Sessions Column -->
+    <aside class="flex h-full min-h-0 flex-col border-b lg:border-b-0 lg:border-r border-jb-light-border dark:border-jb-dark-border">
+      <div class="shrink-0 p-4 border-b border-jb-light-border dark:border-jb-dark-border space-y-3">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-xs uppercase tracking-[0.2em] text-jb-light-comment dark:text-jb-dark-comment">Sessions</div>
+            <div class="text-base font-semibold"><%= project.name %></div>
+          </div>
+          <span class="text-xs px-2 py-1 rounded-full bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+            <%= sessions.length %>
+          </span>
+        </div>
+        <form action="/search" method="GET" class="flex gap-2">
+          <input type="hidden" name="project" value="<%= project.projectUuid %>" />
+          <input
+            type="text"
+            name="q"
+            placeholder="Search sessions..."
+            class="flex-1 px-3 py-1.5 text-sm rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent"
+          />
+        </form>
+      </div>
+      <div class="min-h-0 flex-1 overflow-y-auto p-2 pb-1 space-y-2">
+        <% if (sessions.length === 0) { %>
+          <div class="p-4 text-sm text-jb-light-comment dark:text-jb-dark-comment">No sessions yet.</div>
+        <% } else { %>
+          <% const activeSessionKey = (typeof activeSessionId !== 'undefined' && activeSessionId) ? activeSessionId : null; %>
+          <% const orderedSessions = activeSessionKey ? [sessions.find(s => s.sessionId === activeSessionKey), ...sessions.filter(s => s.sessionId !== activeSessionKey)].filter(Boolean) : sessions; %>
+          <% orderedSessions.forEach((session, index) => { %>
+            <a href="/sessions/<%= session.sessionId %>"
+               class="group block rounded-xl border border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60 hover:shadow-sm transition">
+              <div class="p-3 space-y-2">
+                <div class="flex items-center gap-2">
+                  <div class="flex-shrink-0 provider-icon w-4 h-4 <%= session.provider %>" title="<%= session.provider.replace('_', ' ') %>">
+                    <img src="/assets/icons/providers/<%= session.provider %>.svg" alt="<%= session.provider %>">
+                  </div>
+                  <div class="font-medium truncate group-hover:text-jb-light-accent dark:group-hover:text-jb-dark-accent"><%= session.title %></div>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-jb-light-comment dark:text-jb-dark-comment">
+                  <span class="px-2 py-0.5 rounded-full bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary"><%= session.messageCount %> msgs</span>
+                  <span>Updated <%= new Date(session.updatedAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+            </a>
+            <% if (index === 0 && activeSessionKey && orderedSessions.length > 1) { %>
+              <div class="my-2 border-t border-jb-light-border/70 dark:border-jb-dark-border/70"></div>
+            <% } %>
+          <% }); %>
+        <% } %>
+      </div>
+    </aside>
+
+    <!-- Content Column -->
+    <section class="flex h-full min-h-0 flex-col">
+      <div class="shrink-0 p-4 border-b border-jb-light-border dark:border-jb-dark-border">
+        <div class="text-xs uppercase tracking-[0.2em] text-jb-light-comment dark:text-jb-dark-comment">Session</div>
+        <div class="text-lg font-semibold">Select a session</div>
+      </div>
+      <div class="min-h-0 flex-1 overflow-y-auto p-6">
+        <div class="rounded-2xl border border-dashed border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg-tertiary/60 dark:bg-jb-dark-bg-tertiary/60 p-6 text-sm text-jb-light-comment dark:text-jb-dark-comment">
+          Choose a session on the left to see details here.
+        </div>
+      </div>
+    </section>
     </div>
-    <form action="/search" method="GET" class="flex gap-2">
-      <input type="hidden" name="project" value="<%= project.projectUuid %>" />
-      <input
-        type="text"
-        name="q"
-        placeholder="Search in <%= project.name %>..."
-        class="px-3 py-1.5 text-sm rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent w-64"
-      />
-      <button
-        type="submit"
-        class="px-4 py-1.5 text-sm rounded-lg bg-jb-light-accent dark:bg-jb-dark-accent text-white hover:bg-jb-light-accent-hover dark:hover:bg-jb-dark-accent-hover transition-colors"
-      >
-        Search
-      </button>
-    </form>
   </div>
-
-  <% if (sessions.length === 0) { %>
-    <div class="text-center py-16">
-      <svg class="w-16 h-16 mx-auto text-jb-light-comment dark:text-jb-dark-comment mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-      </svg>
-      <h3 class="text-lg font-medium mb-2">No sessions found</h3>
-      <p class="text-jb-light-comment dark:text-jb-dark-comment">This project has no sessions yet.</p>
-    </div>
-  <% } else { %>
-    <div class="space-y-3">
-      <% sessions.forEach(session => { %>
-        <a href="/sessions/<%= session.sessionId %>"
-           class="group block p-4 bg-jb-light-bg-secondary dark:bg-jb-dark-bg-secondary rounded-lg border border-jb-light-border dark:border-jb-dark-border hover:border-jb-light-accent dark:hover:border-jb-dark-accent transition-all">
-          <div class="flex items-center gap-3 mb-2">
-            <!-- Provider Icon -->
-            <div class="flex-shrink-0 provider-icon w-5 h-5 <%= session.provider %>" title="<%= session.provider.replace('_', ' ') %>">
-              <img src="/assets/icons/providers/<%= session.provider %>.svg" alt="<%= session.provider %>">
-            </div>
-
-            <h3 class="font-medium truncate group-hover:text-jb-light-accent dark:group-hover:text-jb-dark-accent transition-colors"><%= session.title %></h3>
-          </div>
-
-          <div class="flex items-center gap-4 text-sm text-jb-light-comment dark:text-jb-dark-comment ml-8">
-            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary">
-              <%= session.provider.replace('_', ' ') %>
-            </span>
-            <span><%= session.messageCount %> messages</span>
-            <span>•</span>
-            <span>Created: <%= new Date(session.createdAt).toLocaleDateString() %></span>
-            <span>•</span>
-            <span>Updated: <%= new Date(session.updatedAt).toLocaleDateString() %></span>
-          </div>
-        </a>
-      <% }); %>
-    </div>
-  <% } %>
 </div>

@@ -1,0 +1,33 @@
+<div class="flex items-center gap-3 px-3 py-2 border-b border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg/70 dark:bg-jb-dark-bg/70 rounded-t-2xl">
+  <a href="/" class="flex items-center gap-2 text-base font-semibold hover:text-jb-light-accent dark:hover:text-jb-dark-accent transition-colors">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="3" fill="currentColor"/>
+      <path d="M7 9h10M7 12h10M7 15h6" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    Mega Memory
+  </a>
+  <div class="flex-1 flex justify-center">
+    <form action="/search" method="GET" class="w-full max-w-md">
+      <% if (typeof projectId !== 'undefined' && projectId) { %>
+        <input type="hidden" name="project" value="<%= projectId %>" />
+      <% } %>
+      <input
+        type="text"
+        name="q"
+        value="<%= typeof query !== 'undefined' ? query : '' %>"
+        placeholder="Search sessions..."
+        class="w-full px-3 py-1.5 text-sm rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent"
+      />
+    </form>
+  </div>
+  <div class="flex items-center">
+    <button id="theme-toggle" class="p-1.5 rounded-lg hover:bg-jb-light-bg-tertiary dark:hover:bg-jb-dark-bg-tertiary transition-colors" aria-label="Toggle theme">
+      <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+      </svg>
+      <svg class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+      </svg>
+    </button>
+  </div>
+</div>

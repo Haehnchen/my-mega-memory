@@ -1,141 +1,190 @@
-<div class="space-y-6">
-  <!-- Session Header -->
-  <div class="bg-jb-light-bg-secondary dark:bg-jb-dark-bg-secondary rounded-lg border border-jb-light-border dark:border-jb-dark-border p-6">
-    <!-- Provider Icon and Title -->
-    <div class="flex items-center gap-3 mb-2">
-      <div class="flex-shrink-0 provider-icon w-6 h-6 <%= session.provider %>" title="<%= session.provider.replace('_', ' ') %>">
-        <img src="/assets/icons/providers/<%= session.provider %>.svg" alt="<%= session.provider %>">
-      </div>
-      <h1 class="text-2xl font-bold"><%= session.title %></h1>
-    </div>
+<div class="h-full min-h-0">
+  <div class="grid h-full min-h-0 grid-rows-[auto_1fr] rounded-2xl border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg-secondary/70 dark:bg-jb-dark-bg-secondary/70 backdrop-blur">
+    <%- include('partials/toolbar', { query: typeof query !== 'undefined' ? query : '' }) %>
+    <div class="grid min-h-0 grid-cols-[minmax(180px,18%)_minmax(220px,24%)_minmax(0,1fr)]">
+    <!-- Projects Column -->
+    <%- include('partials/projects-sidebar', { projects, activeProjectUuid: typeof activeProjectUuid !== 'undefined' ? activeProjectUuid : null, query: typeof query !== 'undefined' ? query : '', context: 'sessions' }) %>
 
-    <!-- Project path (if available) -->
-    <% if (project && project.path) { %>
-      <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment font-mono mb-4" title="<%= project.path %>">
-        <%= project.path %>
-      </p>
-    <% } %>
-
-    <!-- Metadata -->
-    <div class="flex flex-wrap gap-2 mb-4">
-      <% if (session.version) { %>
-        <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-accent dark:text-jb-dark-accent">
-          <%= session.version %>
-        </span>
-      <% } %>
-      <% if (session.gitBranch) { %>
-        <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
-          <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-          </svg>
-          <%= session.gitBranch %>
-        </span>
-      <% } %>
-      <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
-        <%= session.messageCount %> messages
-      </span>
-    </div>
-
-    <!-- Metadata -->
-    <div class="text-sm text-jb-light-comment dark:text-jb-dark-comment space-y-1">
-      <% if (session.sessionId) { %>
-        <div>Session ID: <%= session.sessionId %></div>
-      <% } %>
-      <% if (session.created) { %>
-        <div>Created: <%= new Date(session.created).toLocaleString() %></div>
-      <% } %>
-      <% if (session.modified && session.modified !== session.created) { %>
-        <div>Modified: <%= new Date(session.modified).toLocaleString() %></div>
-      <% } %>
-      <% if (session.cwd) { %>
-        <div>Working Dir: <%= session.cwd %></div>
-      <% } %>
-      <% if (session.models) { %>
-        <% if (session.models.length > 0) { %>
-          <div>Models: <%= session.models.slice(0, 3).map(m => m[0]).join(', ') %><%= session.models.length > 3 ? ` +${session.models.length - 3} more` : '' %></div>
-        <% } %>
-      <% } %>
-    </div>
-  </div>
-
-  <!-- Messages -->
-  <div class="space-y-4">
-    <% messages.forEach((message, index) => { %>
-      <div class="message-card <%= message.cardType %>" data-sequence="<%= message.sequence %>">
-        <!-- Header -->
-        <div class="flex items-center justify-between px-4 py-2 bg-black/5 dark:bg-white/5 border-b border-jb-light-border dark:border-jb-dark-border">
-          <div class="flex items-center gap-3">
-            <!-- Type Badge -->
-            <span class="type-badge <%= message.cardType %>">
-              <%= message.title %>
-            </span>
-            <% if (message.subtitle) { %>
-              <span class="text-sm text-jb-light-comment dark:text-jb-dark-comment font-mono">
-                <%= message.subtitle %>
-              </span>
-            <% } %>
+    <!-- Sessions Column -->
+    <aside class="flex h-full min-h-0 flex-col border-b lg:border-b-0 lg:border-r border-jb-light-border dark:border-jb-dark-border">
+      <div class="shrink-0 p-4 border-b border-jb-light-border dark:border-jb-dark-border space-y-3">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="text-xs uppercase tracking-[0.2em] text-jb-light-comment dark:text-jb-dark-comment">Sessions</div>
+            <div class="text-base font-semibold"><%= project?.name || 'Unknown project' %></div>
           </div>
-          <span class="text-xs text-jb-light-comment dark:text-jb-dark-comment">
-            <%= new Date(message.timestamp).toLocaleTimeString() %>
+          <span class="text-xs px-2 py-1 rounded-full bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+            <%= sessions.length %>
           </span>
         </div>
-        
-        <!-- Content -->
-        <div class="message-content-wrapper">
-          <div class="message-content">
-            <div class="space-y-3">
-              <% if (message.content && message.content.length > 0) { %>
-                <% message.content.forEach(block => { %>
-                  <% if (block.type === 'text' && block.text) { %>
-                    <p class="text-sm whitespace-pre-wrap"><%= block.text %></p>
-                  <% } else if (block.type === 'code' && block.code) { %>
-                    <div class="relative group">
-                      <% if (block.language) { %>
-                        <div class="absolute top-2 right-2 text-xs text-jb-light-comment dark:text-jb-dark-comment px-2 py-1 bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary rounded">
-                          <%= block.language %>
-                        </div>
-                      <% } %>
-                      <pre class="bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary p-4 rounded-lg overflow-x-auto text-sm font-mono"><code><%= block.code %></code></pre>
-                    </div>
-                  <% } else if (block.type === 'markdown' && block.markdown) { %>
-                    <div class="prose dark:prose-invert prose-sm max-w-none">
-                      <%= block.markdown %>
-                    </div>
-                  <% } else if (block.type === 'json' && block.json) { %>
-                    <pre class="bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary p-4 rounded-lg overflow-x-auto text-sm font-mono text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary"><code><%= block.json %></code></pre>
-                  <% } else if (block.type === 'html' && block.html) { %>
-                    <div class="markdown-content">
-                      <%- block.html %>
-                    </div>
-                  <% } %>
-                <% }); %>
-              <% } else { %>
-                <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment italic">No content</p>
-              <% } %>
+        <form action="/search" method="GET" class="flex">
+          <input type="hidden" name="project" value="<%= project?.projectUuid || '' %>" />
+          <input
+            type="text"
+            name="q"
+            placeholder="Search sessions..."
+            class="flex-1 px-3 py-1.5 text-sm rounded-lg border border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg focus:outline-none focus:ring-2 focus:ring-jb-light-accent dark:focus:ring-jb-dark-accent"
+          />
+        </form>
+      </div>
+      <div class="min-h-0 flex-1 overflow-y-auto p-2 pb-1 space-y-2">
+        <% if (sessions.length === 0) { %>
+          <div class="p-4 text-sm text-jb-light-comment dark:text-jb-dark-comment">No sessions yet.</div>
+        <% } else { %>
+          <% const activeSession = sessions.find(s => s.sessionId === activeSessionId); %>
+          <% const otherSessions = sessions.filter(s => s.sessionId !== activeSessionId); %>
+          <% const orderedSessions = activeSession ? [activeSession, ...otherSessions] : sessions; %>
+          <% orderedSessions.forEach((s, index) => { %>
+            <% const isActive = s.sessionId === activeSessionId; %>
+            <a href="/sessions/<%= s.sessionId %>"
+               class="group block rounded-xl border <%= isActive ? 'border-jb-light-accent dark:border-jb-dark-accent bg-jb-light-bg-tertiary/70 dark:bg-jb-dark-bg-tertiary/70' : 'border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60' %> hover:shadow-sm transition">
+              <div class="p-3 space-y-2">
+                <div class="flex items-center gap-2">
+                  <div class="flex-shrink-0 provider-icon w-4 h-4 <%= s.provider %>" title="<%= s.provider.replace('_', ' ') %>">
+                    <img src="/assets/icons/providers/<%= s.provider %>.svg" alt="<%= s.provider %>">
+                  </div>
+                  <div class="font-medium truncate <%= isActive ? 'text-jb-light-accent dark:text-jb-dark-accent' : 'group-hover:text-jb-light-accent dark:group-hover:text-jb-dark-accent' %>"><%= s.title %></div>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-jb-light-comment dark:text-jb-dark-comment">
+                  <span class="px-2 py-0.5 rounded-full bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary"><%= s.messageCount %> msgs</span>
+                  <span>Updated <%= new Date(s.updatedAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+            </a>
+            <% if (index === 0 && activeSession && otherSessions.length > 0) { %>
+              <div class="my-2 border-t border-jb-light-border/70 dark:border-jb-dark-border/70"></div>
+            <% } %>
+          <% }); %>
+        <% } %>
+      </div>
+    </aside>
+
+    <!-- Content Column -->
+    <section class="flex h-full min-h-0 flex-col">
+      <div class="shrink-0 p-4 border-b border-jb-light-border dark:border-jb-dark-border bg-jb-light-bg/70 dark:bg-jb-dark-bg/70">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div class="min-w-0">
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 provider-icon w-6 h-6 <%= session.provider %>" title="<%= session.provider.replace('_', ' ') %>">
+                <img src="/assets/icons/providers/<%= session.provider %>.svg" alt="<%= session.provider %>">
+              </div>
+              <h1 class="text-xl font-semibold truncate"><%= session.title %></h1>
             </div>
           </div>
-          <div class="expand-bar clickable" onclick="toggleExpand(this)">
-            <span class="expand-text">Expand</span>
-            <span class="expand-icon">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+          <div class="flex flex-wrap gap-2">
+            <% if (session.version) { %>
+              <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-accent dark:text-jb-dark-accent">
+                <%= session.version %>
+              </span>
+            <% } %>
+            <% if (session.gitBranch) { %>
+              <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                </svg>
+                <%= session.gitBranch %>
+              </span>
+            <% } %>
+            <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary">
+              <%= session.messageCount %> messages
             </span>
           </div>
         </div>
+        <div class="mt-2 text-xs text-jb-light-comment dark:text-jb-dark-comment flex flex-wrap gap-1 leading-none">
+          <% if (session.sessionId) { %>
+            <div><span class="font-semibold text-jb-light-comment dark:text-jb-dark-comment">Session ID:</span> <span class="text-jb-light-comment dark:text-jb-dark-comment"><%= session.sessionId %></span></div>
+          <% } %>
+          <% if (session.created) { %>
+            <div><span class="font-semibold text-jb-light-comment dark:text-jb-dark-comment">Created:</span> <span class="text-jb-light-comment dark:text-jb-dark-comment"><%= new Date(session.created).toLocaleString() %></span></div>
+          <% } %>
+          <% if (session.modified && session.modified !== session.created) { %>
+            <div><span class="font-semibold text-jb-light-comment dark:text-jb-dark-comment">Modified:</span> <span class="text-jb-light-comment dark:text-jb-dark-comment"><%= new Date(session.modified).toLocaleString() %></span></div>
+          <% } %>
+          <% if (session.models) { %>
+            <% if (session.models.length > 0) { %>
+              <div><span class="font-semibold text-jb-light-comment dark:text-jb-dark-comment">Models:</span> <span class="text-jb-light-comment dark:text-jb-dark-comment"><%= session.models.slice(0, 3).map(m => m[0]).join(', ') %><%= session.models.length > 3 ? ` +${session.models.length - 3} more` : '' %></span></div>
+            <% } %>
+          <% } %>
+        </div>
       </div>
-    <% }); %>
-  </div>
 
-  <% if (messages.length === 0) { %>
-    <div class="text-center py-16">
-      <svg class="w-16 h-16 mx-auto text-jb-light-comment dark:text-jb-dark-comment mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-      </svg>
-      <h3 class="text-lg font-medium mb-2">No messages</h3>
-      <p class="text-jb-light-comment dark:text-jb-dark-comment">This session has no messages.</p>
+      <div class="min-h-0 flex-1 overflow-y-auto p-4 pb-2 space-y-4">
+        <% messages.forEach((message, index) => { %>
+          <div class="message-card <%= message.cardType %>" data-sequence="<%= message.sequence %>">
+            <div class="flex items-center justify-between px-4 py-2 bg-black/5 dark:bg-white/5 border-b border-jb-light-border dark:border-jb-dark-border">
+              <div class="flex items-center gap-3">
+                <span class="type-badge <%= message.cardType %>">
+                  <%= message.title %>
+                </span>
+                <% if (message.subtitle) { %>
+                  <span class="text-sm text-jb-light-comment dark:text-jb-dark-comment font-mono">
+                    <%= message.subtitle %>
+                  </span>
+                <% } %>
+              </div>
+              <span class="text-xs text-jb-light-comment dark:text-jb-dark-comment">
+                <%= new Date(message.timestamp).toLocaleTimeString() %>
+              </span>
+            </div>
+
+            <div class="message-content-wrapper">
+              <div class="message-content">
+                <div class="space-y-3">
+                  <% if (message.content && message.content.length > 0) { %>
+                    <% message.content.forEach(block => { %>
+                      <% if (block.type === 'text' && block.text) { %>
+                        <p class="text-sm whitespace-pre-wrap"><%= block.text %></p>
+                      <% } else if (block.type === 'code' && block.code) { %>
+                        <div class="relative group">
+                          <% if (block.language) { %>
+                            <div class="absolute top-2 right-2 text-xs text-jb-light-comment dark:text-jb-dark-comment px-2 py-1 bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary rounded">
+                              <%= block.language %>
+                            </div>
+                          <% } %>
+                          <pre class="bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary p-4 rounded-lg overflow-x-auto text-sm font-mono"><code><%= block.code %></code></pre>
+                        </div>
+                      <% } else if (block.type === 'markdown' && block.markdown) { %>
+                        <div class="prose dark:prose-invert prose-sm max-w-none">
+                          <%= block.markdown %>
+                        </div>
+                      <% } else if (block.type === 'json' && block.json) { %>
+                        <pre class="bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary p-4 rounded-lg overflow-x-auto text-sm font-mono text-jb-light-fg-secondary dark:text-jb-dark-fg-secondary"><code><%= block.json %></code></pre>
+                      <% } else if (block.type === 'html' && block.html) { %>
+                        <div class="markdown-content">
+                          <%- block.html %>
+                        </div>
+                      <% } %>
+                    <% }); %>
+                  <% } else { %>
+                    <p class="text-sm text-jb-light-comment dark:text-jb-dark-comment italic">No content</p>
+                  <% } %>
+                </div>
+              </div>
+              <div class="expand-bar clickable" onclick="toggleExpand(this)">
+                <span class="expand-text">Expand</span>
+                <span class="expand-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+
+        <% if (messages.length === 0) { %>
+          <div class="text-center py-16">
+            <svg class="w-16 h-16 mx-auto text-jb-light-comment dark:text-jb-dark-comment mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <h3 class="text-lg font-medium mb-2">No messages</h3>
+            <p class="text-jb-light-comment dark:text-jb-dark-comment">This session has no messages.</p>
+          </div>
+        <% } %>
+      </div>
+    </section>
     </div>
-  <% } %>
+  </div>
 </div>
 
 <style>
@@ -175,7 +224,7 @@
   }
 
   .markdown-content code {
-    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-family: var(--font-mono);
     font-size: 0.9em;
     padding: 2px 6px;
     border-radius: 3px;
@@ -293,7 +342,7 @@
     border-left: 3px solid transparent;
     background: var(--bg-secondary);
   }
-  
+
   /* Light theme message colors */
   .light .message-card.user {
     background: #e8f0fe;
@@ -323,7 +372,7 @@
     background: #fce8e8;
     border-left-color: #d93025;
   }
-  
+
   /* Dark theme message colors */
   .dark .message-card.user {
     background: #2d3b55;
@@ -353,7 +402,7 @@
     background: #4a2d2d;
     border-left-color: #ff6b6b;
   }
-  
+
   /* Type Badges */
   .type-badge {
     display: inline-flex;
@@ -365,7 +414,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  
+
   .light .type-badge.user {
     background: #0066cc;
     color: white;
@@ -394,7 +443,7 @@
     background: #d93025;
     color: white;
   }
-  
+
   .dark .type-badge.user {
     background: #589df6;
     color: #2b2b2b;
@@ -435,7 +484,7 @@
 
   .diff-content-wrapper {
     overflow-x: auto;
-    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
     line-height: 1.5;
   }
@@ -539,14 +588,12 @@
     padding: 16px;
   }
 
-  /* Collapsed state - limit height with gradient fade */
   .message-content-wrapper.collapsed .message-content {
     max-height: 200px;
     overflow: hidden;
     position: relative;
   }
 
-  /* Gradient fade overlay for collapsed state */
   .message-content-wrapper.collapsed .message-content::after {
     content: '';
     position: absolute;
@@ -557,7 +604,6 @@
     pointer-events: none;
   }
 
-  /* Light theme gradient fades */
   .light .message-card.user .message-content-wrapper.collapsed .message-content::after {
     background: linear-gradient(transparent, #e8f0fe);
   }
@@ -580,7 +626,6 @@
     background: linear-gradient(transparent, #fce8e8);
   }
 
-  /* Dark theme gradient fades */
   .dark .message-card.user .message-content-wrapper.collapsed .message-content::after {
     background: linear-gradient(transparent, #2d3b55);
   }
@@ -603,7 +648,6 @@
     background: linear-gradient(transparent, #4a2d2d);
   }
 
-  /* Expand bar styling */
   .expand-bar {
     display: none;
     width: 100%;
@@ -635,13 +679,11 @@
     background: rgba(255, 255, 255, 0.1);
   }
 
-  /* Show expand bar when collapsed or expanded */
   .message-content-wrapper.collapsed .expand-bar,
   .message-content-wrapper.expanded .expand-bar {
     display: block;
   }
 
-  /* Expand icon rotation */
   .expand-bar .expand-icon {
     display: inline-block;
     margin-left: 4px;
@@ -654,7 +696,6 @@
 </style>
 
 <script>
-  // Expand/collapse functionality
   function toggleExpand(element) {
       const wrapper = element.parentElement;
       const textSpan = element.querySelector('.expand-text');
@@ -669,7 +710,6 @@
       }
   }
 
-  // Initialize expandable content on load
   document.addEventListener('DOMContentLoaded', function() {
     const wrappers = document.querySelectorAll('.message-content-wrapper');
     wrappers.forEach(function(wrapper) {

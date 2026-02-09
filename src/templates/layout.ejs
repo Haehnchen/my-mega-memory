@@ -13,6 +13,12 @@
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= typeof title !== 'undefined' ? title : 'Mega Memory' %></title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS v4 CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -75,71 +81,9 @@
     }
   </script>
 </head>
-<body class="min-h-screen bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg">
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-jb-light-bg-secondary dark:bg-jb-dark-bg-secondary border-b border-jb-light-border dark:border-jb-dark-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-14">
-        <div class="flex items-center gap-3">
-          <a href="/" class="flex items-center gap-2 text-xl font-semibold hover:text-jb-light-accent dark:hover:text-jb-dark-accent transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-            </svg>
-            Mega Memory
-          </a>
-        </div>
-        
-        <div class="flex items-center gap-4">
-          <!-- Search -->
-          <a href="/search" class="p-2 rounded-lg hover:bg-jb-light-bg-tertiary dark:hover:bg-jb-dark-bg-tertiary transition-colors" aria-label="Search">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </a>
-          <!-- Theme Toggle -->
-          <button id="theme-toggle" class="p-2 rounded-lg hover:bg-jb-light-bg-tertiary dark:hover:bg-jb-dark-bg-tertiary transition-colors" aria-label="Toggle theme">
-            <!-- Sun icon for dark mode -->
-            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-            </svg>
-            <!-- Moon icon for light mode -->
-            <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Breadcrumbs -->
-  <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs.length > 0) { %>
-  <nav class="bg-jb-light-bg-tertiary dark:bg-jb-dark-bg-tertiary border-b border-jb-light-border dark:border-jb-dark-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ol class="flex items-center gap-2 py-3 text-sm">
-        <% breadcrumbs.forEach((crumb, index) => { %>
-          <% if (index > 0) { %>
-            <li class="text-jb-light-comment dark:text-jb-dark-comment">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </li>
-          <% } %>
-          <li>
-            <% if (crumb.active) { %>
-              <span class="text-jb-light-accent dark:text-jb-dark-accent font-medium"><%= crumb.label %></span>
-            <% } else { %>
-              <a href="<%= crumb.url %>" class="text-jb-light-comment dark:text-jb-dark-comment hover:text-jb-light-accent dark:hover:text-jb-dark-accent transition-colors"><%= crumb.label %></a>
-            <% } %>
-          </li>
-        <% }); %>
-      </ol>
-    </div>
-  </nav>
-  <% } %>
-
+<body class="app-root min-h-screen flex flex-col bg-jb-light-bg dark:bg-jb-dark-bg text-jb-light-fg dark:text-jb-dark-fg">
   <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-1 min-h-0 flex flex-col p-1 sm:p-2 lg:p-2 overflow-hidden">
     <%- body %>
   </main>
 
@@ -157,12 +101,14 @@
     html.classList.remove('light', 'dark');
     html.classList.add(currentTheme);
 
-    themeToggle.addEventListener('click', () => {
-      const newTheme = html.classList.contains('dark') ? 'light' : 'dark';
-      html.classList.remove('light', 'dark');
-      html.classList.add(newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const newTheme = html.classList.contains('dark') ? 'light' : 'dark';
+        html.classList.remove('light', 'dark');
+        html.classList.add(newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    }
 
     // Optional: Listen for system theme changes when no manual preference is set
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
