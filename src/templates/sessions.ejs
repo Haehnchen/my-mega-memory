@@ -35,7 +35,7 @@
           <% const orderedSessions = activeSessionKey ? [sessions.find(s => s.sessionId === activeSessionKey), ...sessions.filter(s => s.sessionId !== activeSessionKey)].filter(Boolean) : sessions; %>
           <% orderedSessions.forEach((session, index) => { %>
             <a href="/sessions/<%= session.sessionId %>"
-               class="group block rounded-xl border border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60 hover:shadow-sm transition">
+               class="group block rounded-xl border border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60 hover:shadow-sm">
               <div class="p-3 space-y-2">
                 <div class="flex items-center gap-2">
                   <div class="flex-shrink-0 provider-icon w-4 h-4 <%= session.provider %>" title="<%= session.provider.replace('_', ' ') %>">

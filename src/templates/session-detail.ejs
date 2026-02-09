@@ -37,7 +37,7 @@
           <% orderedSessions.forEach((s, index) => { %>
             <% const isActive = s.sessionId === activeSessionId; %>
             <a href="/sessions/<%= s.sessionId %>"
-               class="group block rounded-xl border <%= isActive ? 'border-jb-light-accent dark:border-jb-dark-accent bg-jb-light-bg-tertiary/70 dark:bg-jb-dark-bg-tertiary/70' : 'border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60' %> hover:shadow-sm transition">
+               class="group block rounded-xl border <%= isActive ? 'border-jb-light-accent dark:border-jb-dark-accent bg-jb-light-bg-tertiary/70 dark:bg-jb-dark-bg-tertiary/70' : 'border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60' %> hover:shadow-sm">
               <div class="p-3 space-y-2">
                 <div class="flex items-center gap-2">
                   <div class="flex-shrink-0 provider-icon w-4 h-4 <%= s.provider %>" title="<%= s.provider.replace('_', ' ') %>">
@@ -658,7 +658,7 @@
     cursor: pointer;
     user-select: none;
     border-top: 1px solid var(--border-color);
-    transition: background 0.15s ease;
+    transition: none;
   }
 
   .light .expand-bar {
@@ -687,7 +687,7 @@
   .expand-bar .expand-icon {
     display: inline-block;
     margin-left: 4px;
-    transition: transform 0.2s ease;
+    transition: none;
   }
 
   .message-content-wrapper.expanded .expand-bar .expand-icon {

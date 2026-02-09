@@ -24,7 +24,7 @@
           ? `/search?project=${encodeURIComponent(p.projectUuid)}${(typeof query !== 'undefined' && query) ? `&q=${encodeURIComponent(query)}` : ''}`
           : `/sessions/project/${p.projectUuid}`; %>
         <a href="<%= href %>"
-           class="group block rounded-xl border <%= isActive ? 'border-jb-light-accent dark:border-jb-dark-accent bg-jb-light-bg-tertiary/70 dark:bg-jb-dark-bg-tertiary/70' : 'border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60' %> hover:shadow-sm transition">
+           class="group block rounded-xl border <%= isActive ? 'border-jb-light-accent dark:border-jb-dark-accent bg-jb-light-bg-tertiary/70 dark:bg-jb-dark-bg-tertiary/70' : 'border-transparent bg-jb-light-bg dark:bg-jb-dark-bg hover:border-jb-light-accent/60 dark:hover:border-jb-dark-accent/60' %> hover:shadow-sm">
           <div class="p-3 space-y-2">
             <div class="flex items-start justify-between gap-2">
               <div class="min-w-0">
