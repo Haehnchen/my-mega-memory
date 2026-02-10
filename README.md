@@ -89,4 +89,4 @@ The MCP endpoint uses Streamable HTTP over JSON-RPC.
 ## Screenshots
 
 ![My Mega Memory screenshot](docs/my-mega-memory.webp)
-![My Mega Memory screenshot](docs/my-mega-memory_1.webp)
+
