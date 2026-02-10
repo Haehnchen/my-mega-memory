@@ -4,7 +4,7 @@
 
 AI Chat Session Importer and Viewer
 
-Import your AI chat sessions into a local database, then browse and search them through a web interface.
+Import your AI chat sessions into a local database, then browse and search them through a web interface or via MCP tools.
 
 ## Supported Providers
 
@@ -80,6 +80,11 @@ This scans all providers locally and sends each session to the server's `POST /a
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | `POST` | `/api/import/session` | Import a single session. Expects a JSON body with `session`, `provider`, `projectPath`, `projectName`, `created`, and `updated` fields. |
+| `POST` | `/api/mcp` | MCP endpoint (Streamable HTTP) with tools: `search_sessions`, `get_session`. |
+| `GET` | `/api/mcp` | Streamable HTTP session channel (used by MCP clients). |
+| `DELETE` | `/api/mcp` | Close a Streamable HTTP MCP session. |
+
+The MCP endpoint uses Streamable HTTP over JSON-RPC.
 
 ## Screenshots
 

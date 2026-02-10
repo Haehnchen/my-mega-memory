@@ -8,6 +8,7 @@ import {projectController} from '../controller/projectController';
 import {sessionController} from '../controller/sessionController';
 import {searchController} from '../controller/searchController';
 import {apiController} from '../controller/apiController';
+import {mcpController} from '../controller/mcpController';
 
 export const serveCommand = new Command('serve')
   .description('Start the web server to view sessions')
@@ -40,6 +41,7 @@ export const serveCommand = new Command('serve')
     app.use('/sessions', sessionController);
     app.use('/search', searchController);
     app.use('/api', apiController);
+    app.use('/api/mcp', mcpController);
     
     // Error handler
     app.use((err: any, req: express.Request, res: express.Response, _next: express.NextFunction) => {
