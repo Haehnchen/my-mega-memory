@@ -7,7 +7,8 @@ export enum SessionProvider {
   OPENCODE = 'opencode',
   CODEX = 'codex',
   AMP = 'amp',
-  JUNIE = 'junie'
+  JUNIE = 'junie',
+  KILO_CODE = 'kilocode'
 }
 
   /**

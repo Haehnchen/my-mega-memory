@@ -18,6 +18,7 @@ import { OpenCodeAdapter } from './opencode/adapter';
 import { CodexAdapter } from './codex/adapter';
 import { AmpAdapter } from './amp/adapter';
 import { JunieAdapter } from './junie/adapter';
+import { KiloSessionAdapter } from './kilocode/adapter';
 
 function createDefaultAdapters(): SessionAdapter[] {
   return [
@@ -26,6 +27,7 @@ function createDefaultAdapters(): SessionAdapter[] {
     new CodexAdapter(),
     new AmpAdapter(),
     new JunieAdapter(),
+    new KiloSessionAdapter(),
   ];
 }
 

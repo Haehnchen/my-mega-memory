@@ -1,0 +1,39 @@
+[
+  {
+    "ts": 1769678851775,
+    "type": "say",
+    "say": "text",
+    "text": "select"
+  },
+  {
+    "ts": 1769678851811,
+    "type": "say",
+    "say": "api_req_started",
+    "text": "{\"apiProtocol\":\"openai\",\"inferenceProvider\":\"Minimax\",\"model\":\"minimax-chat\",\"tokensIn\":12324}"
+  },
+  {
+    "ts": 1769678854597,
+    "type": "say",
+    "say": "reasoning",
+    "text": "The user wants to select something. I need to understand what they want to select and provide appropriate options."
+  },
+  {
+    "ts": 1769678857825,
+    "type": "say",
+    "say": "checkpoint_saved",
+    "text": "994d95c7abc123def456"
+  },
+  {
+    "ts": 1769678857827,
+    "type": "ask",
+    "ask": "followup",
+    "text": "What would you like to select?",
+    "partial": false
+  },
+  {
+    "ts": 1769678864681,
+    "type": "say",
+    "say": "text",
+    "text": "I can help you select items. Please specify what you're looking for."
+  }
+]

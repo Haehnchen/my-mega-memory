@@ -16,6 +16,7 @@ Import your AI chat sessions into a local database, then browse and search them 
 | **Codex** (CLI) | `~/.codex/sessions/` |
 | **Amp** | `~/.local/share/amp/threads/` |
 | **Junie** | `~/.junie/sessions/` |
+| **Kilocode** | `~/.kilocode/cli/` |
 
 ## Tech Stack
 

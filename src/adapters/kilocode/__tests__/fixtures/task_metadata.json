@@ -1,0 +1,9 @@
+{
+  "files_in_context": [
+    {
+      "path": "/home/daniel/PhpstormProjects/junie/src/main.ts",
+      "content_preview": "console.log('Hello');"
+    }
+  ],
+  "cwd": "/home/daniel/PhpstormProjects/junie"
+}

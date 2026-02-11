@@ -1,0 +1,20 @@
+[
+  {
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "select"
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "I can help you select items. Please specify what you're looking for."
+      }
+    ]
+  }
+]
