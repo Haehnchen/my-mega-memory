@@ -18,6 +18,7 @@ Import your AI chat sessions into a local database, then browse and search them 
 | **Junie** | `~/.junie/sessions/` |
 | **Kilocode** | `~/.kilocode/cli/` |
 | **Gemini** | `~/.gemini/tmp/{project}/chats/` |
+| **Droid** (Factory.ai) | `~/.factory/sessions/{project/` |
 
 ## Tech Stack
 

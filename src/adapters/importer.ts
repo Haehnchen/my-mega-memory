@@ -20,6 +20,7 @@ import { AmpAdapter } from './amp/adapter';
 import { JunieAdapter } from './junie/adapter';
 import { KiloSessionAdapter } from './kilocode/adapter';
 import { GeminiAdapter } from './gemini/adapter';
+import { DroidAdapter } from './droid/adapter';
 
 function createDefaultAdapters(): SessionAdapter[] {
   return [
@@ -30,6 +31,7 @@ function createDefaultAdapters(): SessionAdapter[] {
     new JunieAdapter(),
     new KiloSessionAdapter(),
     new GeminiAdapter(),
+    new DroidAdapter(),
   ];
 }
 

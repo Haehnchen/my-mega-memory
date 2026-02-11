@@ -1,0 +1,3 @@
+{"type":"session_start","id":"test-session-001","title":"Simple test","sessionTitle":"New Session","owner":"daniel","version":2,"cwd":"/home/daniel/test"}
+{"type":"message","id":"msg-001","timestamp":"2026-01-24T16:49:08.867Z","message":{"role":"user","content":[{"type":"text","text":"Hello, world!"}]}}
+{"type":"message","id":"msg-002","timestamp":"2026-01-24T16:49:10.123Z","message":{"role":"assistant","content":[{"type":"text","text":"Hi! How can I help you?"}]}}

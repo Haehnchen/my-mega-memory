@@ -37,6 +37,8 @@
   --provider-junie-filter: invert(33%) sepia(100%) saturate(1582%) hue-rotate(229deg) brightness(97%) contrast(91%);
   /* Kilo Code: blue #2563EB */
   --provider-kilocode-filter: invert(34%) sepia(74%) saturate(2000%) hue-rotate(210deg) brightness(95%) contrast(95%);
+  /* Droid: teal #0D9488 */
+  --provider-droid-filter: invert(43%) sepia(86%) saturate(450%) hue-rotate(130deg) brightness(91%) contrast(88%);
   /* Default: gray */
   --provider-default-filter: invert(48%) sepia(0%) saturate(0%) hue-rotate(191deg) brightness(95%) contrast(88%);
 }
@@ -55,6 +57,8 @@
   --provider-junie-filter: invert(56%) sepia(100%) saturate(265%) hue-rotate(216deg) brightness(105%) contrast(93%);
   /* Kilo Code: light blue #60A5FA */
   --provider-kilocode-filter: invert(65%) sepia(30%) saturate(1000%) hue-rotate(190deg) brightness(105%) contrast(95%);
+  /* Droid: light teal #2DD4BF */
+  --provider-droid-filter: invert(69%) sepia(85%) saturate(450%) hue-rotate(125deg) brightness(95%) contrast(88%);
   /* Default: light gray */
   --provider-default-filter: invert(75%) sepia(0%) saturate(0%) hue-rotate(191deg) brightness(91%) contrast(84%);
 }
@@ -88,6 +92,11 @@
 .provider-icon.kilocode img,
 .kilocode .provider-icon img {
   filter: var(--provider-kilocode-filter);
+}
+
+.provider-icon.droid img,
+.droid .provider-icon img {
+  filter: var(--provider-droid-filter);
 }
 
 .provider-icon.default img,

@@ -1,0 +1,4 @@
+{"type":"session_start","id":"test-session-003","title":"Multi-tool test","sessionTitle":"New Session","owner":"daniel","version":2,"cwd":"/home/daniel/test"}
+{"type":"message","id":"msg-001","timestamp":"2026-01-24T16:49:08.867Z","message":{"role":"user","content":[{"type":"text","text":"Read file.txt then list directory"}]}}
+{"type":"message","id":"msg-002","timestamp":"2026-01-24T16:49:10.123Z","message":{"role":"assistant","content":[{"type":"tool_use","id":"toolu_01abc123","name":"Read","input":{"file_path":"/path/to/file.txt"}},{"type":"tool_use","id":"toolu_01def456","name":"LS","input":{"directory_path":"/path/to"}}]}}
+{"type":"message","id":"msg-003","timestamp":"2026-01-24T16:49:11.456Z","message":{"role":"user","content":[{"type":"tool_result","tool_use_id":"toolu_01abc123","content":"file content"},{"type":"tool_result","tool_use_id":"toolu_01def456","content":"directory listing"}]}}
