@@ -8,7 +8,8 @@ export enum SessionProvider {
   CODEX = 'codex',
   AMP = 'amp',
   JUNIE = 'junie',
-  KILO_CODE = 'kilocode'
+  KILO_CODE = 'kilocode',
+  GEMINI = 'gemini'
 }
 
   /**

@@ -1,0 +1,24 @@
+{
+  "sessionId": "test-gemini-simple-123",
+  "projectHash": "78e0c7326cf29ebec3d3e54ec35141c0af295bdb67fc76f00e79dc9cff73ba00",
+  "startTime": "2026-02-08T17:00:00.000Z",
+  "lastUpdated": "2026-02-08T17:01:00.000Z",
+  "messages": [
+    {
+      "id": "msg-gemini-001",
+      "timestamp": "2026-02-08T17:01:00.000Z",
+      "type": "gemini",
+      "content": "This is a simple assistant response without thoughts or tool calls.",
+      "thoughts": [],
+      "tokens": {
+        "input": 100,
+        "output": 50,
+        "cached": 0,
+        "thoughts": 0,
+        "tool": 0,
+        "total": 150
+      },
+      "model": "gemini-3-flash-preview"
+    }
+  ]
+}
