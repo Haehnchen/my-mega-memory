@@ -17,6 +17,7 @@ Import your AI chat sessions into a local database, then browse and search them 
 | **Amp** | `~/.local/share/amp/threads/` |
 | **Junie** | `~/.junie/sessions/` |
 | **Kilocode** | `~/.kilocode/cli/` |
+| **Gemini** | `~/.gemini/tmp/{project}/chats/` |
 
 ## Tech Stack
 

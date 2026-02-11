@@ -1,0 +1,14 @@
+{
+  "sessionId": "test-info-123",
+  "projectHash": "78e0c7326cf29ebec3d3e54ec35141c0af295bdb67fc76f00e79dc9cff73ba00",
+  "startTime": "2026-02-08T17:00:00.000Z",
+  "lastUpdated": "2026-02-08T17:00:10.000Z",
+  "messages": [
+    {
+      "id": "msg-info-001",
+      "timestamp": "2026-02-08T17:00:10.000Z",
+      "type": "info",
+      "content": "Gemini CLI update available! 0.25.1 → 0.27.3"
+    }
+  ]
+}
